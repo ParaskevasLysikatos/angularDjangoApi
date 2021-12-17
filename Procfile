@@ -1,1 +1,1 @@
-web: gunicorn ipearanceMain.wsgi:application --log-file -
+web: gunicorn angularEmployeesDevices.wsgi:application --log-file -

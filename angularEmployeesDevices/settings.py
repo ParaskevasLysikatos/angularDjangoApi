@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'EmployeesDevicesApi'
-    'reset_migrations',
+   # 'reset_migrations',
     'corsheaders',
 ]
 
@@ -80,19 +80,19 @@ WSGI_APPLICATION = 'angularEmployeesDevices.wsgi.application'
 
 
 REST_FRAMEWORK = {
-    #'DEFAULT_PERMISSION_CLASSES': (
+    'DEFAULT_PERMISSION_CLASSES': (
     # 'rest_framework.permissions.IsAuthenticated',
-   # 'rest_framework.permissions.AllowAny',
+    'rest_framework.permissions.AllowAny',
     # 'rest_framework.permissions.IsAdminUser',
     #  'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     # 'rest_framework.permissions.DjangoModelPermissions',
 
-    # ),
+     ),
     # 'DEFAULT_RENDERER_CLASSES': (
     #         'rest_framework.renderers.JSONRenderer',
     #)
    	'DEFAULT_AUTHENTICATION_CLASSES': [
-            'rest_framework.authentication.TokenAuthentication',
+           # 'rest_framework.authentication.TokenAuthentication',
         ]
 }
 

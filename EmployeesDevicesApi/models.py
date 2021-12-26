@@ -19,8 +19,9 @@ class Employee(models.Model):
 
 class Device(models.Model):
     serial_number = models.CharField(max_length=255,unique=True)
-    description = models.CharField(max_length=255,blank=False,null=False)
-    type = models.IntegerField(null=True)
+    description = models.CharField(
+        max_length=255, blank=False, null=False, validators=[MinLengthValidator(3)])
+    type = models.IntegerField(null=False,blank=False)
     owner = models.ForeignKey(Employee, blank=True, null=True, on_delete=models.CASCADE)
     def __str__(self):
         return str(self.serial_number)+' '+ self.description+' '+ str(self.type)+' '+ str(self.owner)

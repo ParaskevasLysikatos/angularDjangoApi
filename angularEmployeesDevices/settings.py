@@ -56,7 +56,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     #'django.middleware.csrf.CsrfViewMiddleware',
     'corsheaders.middleware.CorsPostCsrfMiddleware',
-    #'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -114,10 +114,10 @@ REST_FRAMEWORK = {
 DATABASES = {
     'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'dckkdhttjbu3tn',
-            'USER': 'iojxeyxtpilwgn',
-            'PASSWORD': '8b8a852a1afbb63e40d8bf4ef78dbcd8ea6045e20f23750b25da770da1e83526',
-            'HOST': 'ec2-99-81-177-233.eu-west-1.compute.amazonaws.com',
+            'NAME': 'dc7p5m3kh71uhp',
+            'USER': 'vkqnhovnonnsqz',
+            'PASSWORD': 'd1f6d02ace86a11b63a87998cb5ef822141f6e4b19fec9ea471a09aacf63c83b',
+            'HOST': 'ec2-18-202-156-92.eu-west-1.compute.amazonaws.com',
             'PORT': '5432',
         }
     }

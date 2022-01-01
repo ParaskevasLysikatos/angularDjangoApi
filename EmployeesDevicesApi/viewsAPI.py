@@ -43,16 +43,17 @@ class image_upload(APIView):
         upload.save()
         image_url = upload.image.url
         return JsonResponse({'image_url':image_url,'employee_id':emp.id})
-    def put(self, request): 
-        employee=request.data['employee_id']
+    
+    
+class image_upload_one(APIView):
+    def put(self, request,id): 
+        employee=id
         image_file = request.FILES['image_file']
         emp=Employee.objects.get(pk=employee);
         upload = Upload(employee=emp,image=image_file,uploaded_at=datetime.now())
         upload.save()
         image_url = upload.image.url
         return JsonResponse({'image_url':image_url,'employee_id':emp.id})
-    
-class image_upload_one(APIView):
     def get(self, request,id): 
         uploadOne=list(Upload.objects.filter(pk=id).values())
         return JsonResponse(uploadOne,safe=False)

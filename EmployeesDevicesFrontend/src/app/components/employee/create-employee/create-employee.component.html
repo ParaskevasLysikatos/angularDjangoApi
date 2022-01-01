@@ -1,36 +1,36 @@
 <h3>Create an employee</h3>
-<form class="example-form"  [formGroup]="employeeForm"   (ngSubmit)="onSubmit()" novalidate>
+<form class="example-form" [formGroup]="employeeForm" (ngSubmit)="onSubmit()" novalidate>
 
-<mat-form-field class="example-full-width" appearance="fill">
+  <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Name</mat-label>
-    <input type="text" matInput formControlName="name"  placeholder="Your name">
+    <input type="text" matInput formControlName="name" placeholder="Your name">
     <div *ngIf="!name?.valid && (name?.dirty ||name?.touched)">
-    <mat-error *ngIf="name.errors.minlength && !name.errors.required">
-      Please enter more than 3 letters
-    </mat-error>
-    <mat-error *ngIf="name.errors.required">
-      Name is <strong>required</strong>
-    </mat-error>
+      <mat-error *ngIf="name.errors.minlength && !name.errors.required">
+        Please enter more than 3 letters
+      </mat-error>
+      <mat-error *ngIf="name.errors.required">
+        Name is <strong>required</strong>
+      </mat-error>
     </div>
   </mat-form-field>
 
 
-&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Email</mat-label>
     <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
     <div *ngIf="!email?.valid && (email?.dirty ||email?.touched)">
-    <mat-error *ngIf="email.errors.email && !email.errors.required">
-      Please enter a valid email address
-    </mat-error>
-    <mat-error *ngIf="email.errors.required">
-      Email is <strong>required</strong>
-    </mat-error>
+      <mat-error *ngIf="email.errors.email && !email.errors.required">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="email.errors.required">
+        Email is <strong>required</strong>
+      </mat-error>
     </div>
   </mat-form-field>
 
   &nbsp;&nbsp;&nbsp;&nbsp;
-   <mat-form-field class="example-full-width2" appearance="fill">
+  <mat-form-field class="example-full-width2" appearance="fill">
     <mat-label>Personal device inventory</mat-label>
     <mat-select formControlName="ownedDev" multiple>
       <mat-option style="color:antiquewhite;" *ngFor="let inv of unassignedDevices" [value]="inv.id">

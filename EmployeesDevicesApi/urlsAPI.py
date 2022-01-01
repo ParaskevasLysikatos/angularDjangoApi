@@ -10,5 +10,10 @@ urlpatterns = [
     
     path('devices',viewsAPI.DevicesList.as_view()),
     path('devices/<int:pk>/', viewsAPI.DevicesDetail.as_view()),
-  
+    
+    
+    path('image',viewsAPI.image_upload.as_view(),name="Get for all without image url,POST for create employee and PUT for edit,requires: image_file and employee_id returns image_url and employee_id"),
+    path('image/<int:id>/',viewsAPI.image_upload_one.as_view(),name="Get one without image url")
+    
+
 ]

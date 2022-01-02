@@ -187,11 +187,7 @@ USE_S3=True
 
 if USE_S3:
     # aws settings
-    AWS_ACCESS_KEY_ID = 'ddd'
-    AWS_SECRET_ACCESS_KEY = 'dddd'
-    AWS_STORAGE_BUCKET_NAME = 'django-angular-employee'
-    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+   
     # s3 static settings
     # STATIC_LOCATION='static'
     # AWS_LOCATION = 'static'

@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-cy9&rcw$mh&7)6vfuxt#!@38#x-stb#j7^i(!2(983mx5l7pbd'
+SECRET_KEY = 'dddd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -121,9 +121,9 @@ REST_FRAMEWORK = {
 DATABASES = {
     'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'dc7p5m3kh71uhp',
-            'USER': 'vkqnhovnonnsqz',
-            'PASSWORD': 'd1f6d02ace86a11b63a87998cb5ef822141f6e4b19fec9ea471a09aacf63c83b',
+            'NAME': 'dddd',
+            'USER': 'ddd',
+            'PASSWORD': 'dddd',
             'HOST': 'ec2-18-202-156-92.eu-west-1.compute.amazonaws.com',
             'PORT': '5432',
         }
@@ -187,8 +187,8 @@ USE_S3=True
 
 if USE_S3:
     # aws settings
-    AWS_ACCESS_KEY_ID = 'AKIA5W76S5UFPEGKWM6D'
-    AWS_SECRET_ACCESS_KEY = '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'
+    AWS_ACCESS_KEY_ID = 'ddd'
+    AWS_SECRET_ACCESS_KEY = 'dddd'
     AWS_STORAGE_BUCKET_NAME = 'django-angular-employee'
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}

@@ -1,0 +1,48 @@
+<!-- Footer -->
+<footer id="footer" class="text-center text-lg-start bg-light text-muted">
+  <!-- Section: Social media -->
+  <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+
+    <!-- Copyright-left -->
+
+    <div class="text-center" style="background-color: rgba(0, 0, 0, 0.05);">
+      © 2021 Copyright:
+      <a class="text-reset fw-bold" href="https://www.linkedin.com/in/paraskevas-lysikatos/">Lysikatos Paraskevas</a>
+    </div>
+
+    <!-- Copyright left-->
+    <!-- middle-->
+    <div class="me-5 d-none d-lg-block">
+      <span>My social networks & information</span>
+
+    </div>
+    <!-- middle -->
+
+    <!-- Right -->
+    <div>
+      <a href="" *ngIf="hide;else elseBlock" class="m-1 p-2 text-reset" (click)="hide = !hide">
+        <i class="far fa-eye-slash">E-mail:</i>
+      </a>
+
+      <ng-template #elseBlock>
+        <a href="" class="m-1 p-2 text-reset" (click)="hide = !hide">
+          <i class="far fas fa-eye">vaslysalex@hotmail.gr</i>
+        </a>
+      </ng-template>
+
+
+
+      <a href="https://www.linkedin.com/in/paraskevas-lysikatos/" class="m-1 p-2 text-reset">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="https://github.com/ParaskevasLysikatos" class="m-1 p-2 text-reset">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <!-- Right -->
+  </section>
+  <!-- Section: Social media -->
+
+
+</footer>
+<!-- Footer -->

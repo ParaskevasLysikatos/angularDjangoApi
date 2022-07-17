@@ -181,15 +181,15 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 #     os.path.join(BASE_DIR, 'static'),
 # )
 
-#USE_S3 = os.getenv('USE_S3') == 'TRUE'
+#USE_S3 = os.getenv('USE_S3') == 'TRUE'aaaaa
 USE_S3=True
 
 
 if USE_S3:
     # aws settings
-    AWS_ACCESS_KEY_ID = 'AKIA5W76S5UFPEGKWM6D'
-    AWS_SECRET_ACCESS_KEY = '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'
-    AWS_STORAGE_BUCKET_NAME = 'django-angular-employee'
+    AWS_ACCESS_KEY_ID = 'AKIAVJN6YQIVJH3G6NQ4'
+    AWS_SECRET_ACCESS_KEY = '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'
+    AWS_STORAGE_BUCKET_NAME = 'django-angular-employee-paraskevas'
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
     # s3 static settings

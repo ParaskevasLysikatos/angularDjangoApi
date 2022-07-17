@@ -45,6 +45,6 @@ testem.log
 .DS_Store
 Thumbs.db
 
-/EmployeesDevicesApi
-/angularEmployeesDevices
+#/EmployeesDevicesApi
+#/angularEmployeesDevices
 #/EmployeesDevicesFrontend

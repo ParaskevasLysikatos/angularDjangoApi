@@ -1,1 +1,0 @@
-web: gunicorn angularEmployeesDevices.wsgi:application --log-file -

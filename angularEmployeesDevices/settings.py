@@ -121,9 +121,9 @@ REST_FRAMEWORK = {
 DATABASES = {
     'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'da',
-            'USER': 'l',
-            'PASSWORD': 'b',
+            'NAME': 'da4f4cgprfmi9j',
+            'USER': 'lsraubweehaupd',
+            'PASSWORD': '35d8fd4ca0c7ada585a22452bcc63c480308e21115b6e9e5e642028cef3b762b',
             'HOST': 'ec2-54-170-163-224.eu-west-1.compute.amazonaws.com',
             'PORT': '5432',
         }
@@ -187,11 +187,11 @@ USE_S3=True
 
 if USE_S3:
     # aws settings
-    AWS_ACCESSaaaa_KEY_IDaaaaaa = ''
-    AWS_SECRET_ACCESSaaa_KEYaaaaa = ''
-    AWS_STORAaaaaGE_BUCKET_NAME = 'django-angular-employee-paraskevas'
-    AWS_S3aa_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-    AWS_S3aa_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+    AWS_ACCESS_KEY_ID = 'AKIAVJN6YQIVLRPXY33Q'
+    AWS_SECRET_ACCESS_KEY = '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'
+    AWS_STORAGE_BUCKET_NAME = 'django-angular-employee-paraskevas'
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
     # s3 static settings
     # STATIC_LOCATION='static'
     # AWS_LOCATION = 'static'

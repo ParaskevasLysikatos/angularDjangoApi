@@ -37,7 +37,7 @@ export class EmployeesViewComponent implements OnInit {
   break!:boolean;
   imageData!: any;
   //image
-  bucket:string = 'https://django-angular-employee.s3.amazonaws.com/media/';
+  bucket:string = 'https://django-angular-employee-paraskevas.s3.eu-central-1.amazonaws.com/media/';
 
   constructor(
     private empSrv: EmployeesSrvService,

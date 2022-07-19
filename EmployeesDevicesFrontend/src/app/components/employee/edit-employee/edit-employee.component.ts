@@ -23,7 +23,7 @@ export class EditEmployeeComponent implements OnInit {
   //upload
   loading: boolean = false; // Flag variable
   image!: File; // Variable to store file
-  bucket:string = 'https://django-angular-employee.s3.amazonaws.com/media/';
+  bucket:string = 'https://django-angular-employee-paraskevas.s3.eu-central-1.amazonaws.com/media/';
   finalUrl!:string;
 
   constructor(

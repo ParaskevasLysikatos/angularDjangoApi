@@ -12,7 +12,7 @@ import { environment } from './../../environments/environment';
 export class UploadService {
 
  // Define API
- apiURL = environment.apiUrl+"/api/image";
+ apiURL = environment.domain+"/api/image";
 
   // Http Options
 httpOptions = {

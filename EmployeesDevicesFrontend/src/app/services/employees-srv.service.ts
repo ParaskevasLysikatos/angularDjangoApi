@@ -11,7 +11,7 @@ import { environment } from './../../environments/environment';
 })
 export class EmployeesSrvService {
   // Define API
-  apiURL =environment.apiUrl +'/api/employees';
+  apiURL =environment.domain +'/api/employees';
 
   constructor(private http: HttpClient, private toastr: ToastrService) {}
 

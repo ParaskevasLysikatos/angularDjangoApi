@@ -7,18 +7,18 @@ import { ToastrService } from "ngx-toastr";
 import { environment } from './../../environments/environment';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class DevicesSrvService {
   // Define API
-  apiURL = environment.domain+"/api/devices";
+  apiURL = `${environment.domain + '/api/devices'}`;
 
   constructor(private http: HttpClient, private toastr: ToastrService) {}
 
   // Http Options
   httpOptions = {
     headers: new HttpHeaders({
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     }),
   };
 
@@ -39,7 +39,7 @@ export class DevicesSrvService {
       .pipe(
         tap((data) => {
           // Do your success stuff in here
-          this.toastr.success("Success", "device created", { timeOut: 2000 });
+          this.toastr.success('Success', 'device created', { timeOut: 2000 });
         })
         // retry(1),
         // catchError(this.handleError)
@@ -50,14 +50,14 @@ export class DevicesSrvService {
   updateDevice(id: number, device: Device): Observable<Device> {
     return this.http
       .put<Device>(
-        this.apiURL + "/" + id + "/",
+        this.apiURL + '/' + id + '/',
         JSON.stringify(device),
         this.httpOptions
       )
       .pipe(
         tap((data) => {
           // Do your success stuff in here
-          this.toastr.success("Success", "device updated", { timeOut: 2000 });
+          this.toastr.success('Success', 'device updated', { timeOut: 2000 });
         })
         // retry(1),
         // catchError(this.handleError)
@@ -67,11 +67,11 @@ export class DevicesSrvService {
   // HttpClient API delete() method => Delete Device
   deleteDevice(id: number) {
     return this.http
-      .delete<Device>(this.apiURL + "/" + id, this.httpOptions)
+      .delete<Device>(this.apiURL + '/' + id, this.httpOptions)
       .pipe(
         tap((data) => {
           // Do your success stuff in here
-          this.toastr.success("Success", "device deleted", { timeOut: 2000 });
+          this.toastr.success('Success', 'device deleted', { timeOut: 2000 });
         })
         //retry(1),
         // catchError(this.handleError)
@@ -81,7 +81,7 @@ export class DevicesSrvService {
   // HttpClient API delete() method => Delete Device
   getOneDevice(id: number): Observable<Device> {
     return this.http
-      .get<Device>(this.apiURL + "/" + id, this.httpOptions)
+      .get<Device>(this.apiURL + '/' + id, this.httpOptions)
       .pipe
       // retry(1),
       // catchError(this.handleError)

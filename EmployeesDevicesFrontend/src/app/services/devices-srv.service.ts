@@ -11,7 +11,7 @@ import { environment } from './../../environments/environment';
 })
 export class DevicesSrvService {
   // Define API
-  apiURL = `${environment.domain + '/api/devices'}`;
+  readonly apiURL = `${environment.domain + '/api/devices'}`;
 
   constructor(private http: HttpClient, private toastr: ToastrService) {}
 

@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
-
+import { environment } from './../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ import { HttpHeaders } from '@angular/common/http';
 export class UploadService {
 
  // Define API
- apiURL = "https://django-angular-api.herokuapp.com/api/image";
+ apiURL = environment.apiUrl+"/api/image";
 
   // Http Options
 httpOptions = {

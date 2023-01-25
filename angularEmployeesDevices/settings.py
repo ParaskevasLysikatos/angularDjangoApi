@@ -16,6 +16,14 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+import dj_database_url
+import environ
+
+env =  environ.Env()
+env.read_env()
+
+db_config = dj_database_url.config(conn_max_age=600, ssl_require=True)
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -106,27 +114,21 @@ REST_FRAMEWORK = {
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#    'default': {
-#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'test', 
-#         'USER': 'postgres', 
-#         'PASSWORD': '1',
-#         'HOST': '127.0.0.1', 
-#         'PORT': '5432',
-#         }
-# }
-
-
-DATABASES = {
-    'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'da4f4cgprfmi9j',
-            'USER': 'lsraubweehaupd',
-            'PASSWORD': '35d8fd4ca0c7ada585a22452bcc63c480308e21115b6e9e5e642028cef3b762b',
-            'HOST': 'ec2-54-170-163-224.eu-west-1.compute.amazonaws.com',
-            'PORT': '5432',
-        }
+if db_config:
+    # heroku/railway - production
+    DATABASES = {}
+    DATABASES['default'] = db_config
+else:
+    # local/development
+    DATABASES = {
+       'default': { 
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dbEmployeeDevice', 
+        'USER': 'postgres', 
+        'PASSWORD': '123',
+        'HOST': '127.0.0.1', 
+        'PORT': '5432',
+      }
     }
 
 
@@ -182,16 +184,11 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # )
 
 #USE_S3 = os.getenv('USE_S3') == 'TRUE'aaaaa
-USE_S3=True
+USE_S3=db_config #if it online
 
 
 if USE_S3:
     # aws settings
-    AWS_ACCESS_KEY_ID = 'AKIAVJN6YQIVLRPXY33Q'
-    AWS_SECRET_ACCESS_KEY = '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'
-    AWS_STORAGE_BUCKET_NAME = 'django-angular-employee-paraskevas'
-    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
     # s3 static settings
     # STATIC_LOCATION='static'
     # AWS_LOCATION = 'static'

@@ -4,13 +4,14 @@ import { Observable, throwError } from "rxjs";
 import { retry, catchError, tap } from "rxjs/operators";
 import { Device } from "../interfaces/device";
 import { ToastrService } from "ngx-toastr";
+import { environment } from './../../environments/environment';
 
 @Injectable({
   providedIn: "root",
 })
 export class DevicesSrvService {
   // Define API
-  apiURL = "https://django-angular-api.herokuapp.com/api/devices";
+  apiURL = environment.apiUrl+"/api/devices";
 
   constructor(private http: HttpClient, private toastr: ToastrService) {}
 

@@ -4,20 +4,21 @@ import { BehaviorSubject, Observable, Subject, throwError } from "rxjs";
 import { retry, catchError, tap } from "rxjs/operators";
 import { Employee } from "../interfaces/employee.interface";
 import { ToastrService } from "ngx-toastr";
+import { environment } from './../../environments/environment';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class EmployeesSrvService {
   // Define API
-  apiURL = "https://django-angular-api.herokuapp.com/api/employees";
+  apiURL =environment.apiUrl +'/api/employees';
 
   constructor(private http: HttpClient, private toastr: ToastrService) {}
 
   // Http Options
   httpOptions = {
     headers: new HttpHeaders({
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     }),
   };
 
@@ -38,7 +39,7 @@ export class EmployeesSrvService {
       .pipe(
         tap((data) => {
           // Do your success stuff in here
-          this.toastr.success("Success", "employee created", { timeOut: 2000 });
+          this.toastr.success('Success', 'employee created', { timeOut: 2000 });
         })
         // retry(1),
         // catchError(this.handleError)
@@ -48,11 +49,11 @@ export class EmployeesSrvService {
   // HttpClient API put() method => Update employee
   updateEmployee(id: number, employee: Employee): Observable<Employee> {
     return this.http
-      .put<Employee>(this.apiURL + "/" + id + "/", employee, this.httpOptions)
+      .put<Employee>(this.apiURL + '/' + id + '/', employee, this.httpOptions)
       .pipe(
         tap((data) => {
           // Do your success stuff in here
-          this.toastr.success("Success", "employee updated", { timeOut: 2000 });
+          this.toastr.success('Success', 'employee updated', { timeOut: 2000 });
         })
         // retry(1),
         // catchError(this.handleError)
@@ -62,11 +63,11 @@ export class EmployeesSrvService {
   // HttpClient API delete() method => Delete employee
   deleteEmployee(id: number) {
     return this.http
-      .delete<Employee>(this.apiURL + "/" + id, this.httpOptions)
+      .delete<Employee>(this.apiURL + '/' + id, this.httpOptions)
       .pipe(
         tap((data) => {
           // Do your success stuff in here
-          this.toastr.success("Success", "employee deleted", { timeOut: 2000 });
+          this.toastr.success('Success', 'employee deleted', { timeOut: 2000 });
         })
         // retry(1),
         // catchError(this.handleError)
@@ -76,7 +77,7 @@ export class EmployeesSrvService {
   // HttpClient API delete() method => Delete employee
   getOneEmployee(id: number): Observable<Employee> {
     return this.http
-      .get<Employee>(this.apiURL + "/" + id, this.httpOptions)
+      .get<Employee>(this.apiURL + '/' + id, this.httpOptions)
       .pipe
       // retry(1),
       // catchError(this.handleError)

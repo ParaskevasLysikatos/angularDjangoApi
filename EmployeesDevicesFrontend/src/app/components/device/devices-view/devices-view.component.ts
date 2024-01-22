@@ -1,16 +1,17 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
-import { Device } from "src/app/interfaces/device";
-import { Employee } from "src/app/interfaces/employee.interface";
-import { Type } from "src/app/interfaces/type.";
-import { DevicesSrvService } from "src/app/services/devices-srv.service";
-import { EmployeesSrvService } from "src/app/services/employees-srv.service";
+import { MyType } from "../../../interfaces/type.";
+import { EmployeesSrvService } from "../../../services/employees-srv.service";
+import { DevicesSrvService } from "../../../services/devices-srv.service";
+import { Device } from "../../../interfaces/device";
+import { Employee } from "../../../interfaces/employee.interface";
+
 
 @Component({
   selector: "app-devices-view",
   templateUrl: "./devices-view.component.html",
-  styleUrls: ["./devices-view.component.scss"],
+  styleUrls: ["./devices-view.component.css"],
 })
 export class DevicesViewComponent implements OnInit {
   displayedColumns1: string[] = [
@@ -25,27 +26,30 @@ export class DevicesViewComponent implements OnInit {
   dataSource1: any = [];
 
   //[1-phone image,2-laptop image,3-tablet image]
-  typeData: Type[] = [
-    new Type(1, "../../assets/phone.png"),
-    new Type(2, "../../assets/laptop.png"),
-    new Type(3, "../../assets/tablet.png"),
+  typeData: MyType[] = [
+    {id:1, image:"../../assets/phone.png"},
+   {id:2, image:"../../assets/laptop.png"},
+   {id:3, image:"../../assets/tablet.png"}
   ];
 
   employees!: any;
 
   constructor(
-    private devSrv: DevicesSrvService,
-    private empSrv: EmployeesSrvService,
+  //  private devSrv: DevicesSrvService,
+  //  private empSrv: EmployeesSrvService,
     private toastr: ToastrService,
     private router: Router
   ) {}
+
+  private empSrv : EmployeesSrvService = inject(EmployeesSrvService);
+  private devSrv : DevicesSrvService = inject(DevicesSrvService);
 
   ngOnInit(): void {
     this.devSrv.getDevices().subscribe(
       (res: Device) => {
         this.dataSource1 = res;
       },
-      (error) => {
+      (error:any) => {
         this.toastr.warning(
           "Error",
           error.message +
@@ -62,7 +66,7 @@ export class DevicesViewComponent implements OnInit {
       (res: Employee) => {
         this.employees = res;
       },
-      (error) => {
+      (error:any) => {
         this.toastr.warning(
           "Error",
           error.message + " " + error.error.email + " " + error.error.name,
@@ -78,7 +82,7 @@ export class DevicesViewComponent implements OnInit {
         (res: any) => {
           this.dataSource1 = res;
         },
-        (error) => {
+        (error:any) => {
           this.toastr.warning(
             "Error",
             error.message +

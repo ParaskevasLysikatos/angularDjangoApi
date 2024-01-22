@@ -1,17 +1,17 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Type, inject } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
-import { Device } from "src/app/interfaces/device";
-import { Employee } from "src/app/interfaces/employee.interface";
-import { Type } from "src/app/interfaces/type.";
-import { DevicesSrvService } from "src/app/services/devices-srv.service";
-import { EmployeesSrvService } from "src/app/services/employees-srv.service";
+import { Device } from "../../../interfaces/device";
+import { Employee } from "../../../interfaces/employee.interface";
+import { EmployeesSrvService } from "../../../services/employees-srv.service";
+import { DevicesSrvService } from "../../../services/devices-srv.service";
+import { MyType } from "../../../interfaces/type.";
 
 @Component({
   selector: "app-edit-device",
   templateUrl: "./edit-device.component.html",
-  styleUrls: ["./edit-device.component.scss"],
+  styleUrls: ["./edit-device.component.css"],
 })
 export class EditDeviceComponent implements OnInit {
   deviceForm: any;
@@ -19,16 +19,19 @@ export class EditDeviceComponent implements OnInit {
   deviceData!: Device;
   devId!: number;
 
-  typeData: Type[] = [
-    new Type(1, "../../assets/phone.png"),
-    new Type(2, "../../assets/laptop.png"),
-    new Type(3, "../../assets/tablet.png"),
+  typeData: MyType[] = [
+   {id:1, image:"../../assets/phone.png"},
+   {id:2, image:"../../assets/laptop.png"},
+   {id:3, image:"../../assets/tablet.png"}
   ];
+
+  private empSrv : EmployeesSrvService = inject(EmployeesSrvService);
+  private devSrv : DevicesSrvService = inject(DevicesSrvService);
 
   constructor(
     private formBuilder: FormBuilder,
-    private devSrv: DevicesSrvService,
-    private empSrv: EmployeesSrvService,
+  //  private devSrv: DevicesSrvService,
+  //  private empSrv: EmployeesSrvService,
     private toastr: ToastrService,
     private router: Router,
     private activatedRoute: ActivatedRoute
@@ -48,7 +51,7 @@ export class EditDeviceComponent implements OnInit {
       (res: Employee) => {
         this.employees = res;
       },
-      (error) => {
+      (error:any) => {
         this.toastr.warning(
           "Error",
           error.message + " " + error.error.email + " " + error.error.name,
@@ -57,7 +60,7 @@ export class EditDeviceComponent implements OnInit {
       }
     );
     this.devSrv.getOneDevice(this.devId).subscribe(
-      (res) => {
+      (res:any) => {
         this.deviceData = res;
 
         this.deviceForm.controls.serial_number.patchValue(
@@ -69,7 +72,7 @@ export class EditDeviceComponent implements OnInit {
         this.deviceForm.controls.type.patchValue(this.deviceData.type);
         this.deviceForm.controls.owner.patchValue(this.deviceData.owner);
       },
-      (error) => {
+      (error:any) => {
         this.toastr.warning(
           "Error",
           error.message +
@@ -102,12 +105,12 @@ export class EditDeviceComponent implements OnInit {
   onSubmit() {
     //console.log( this.employeeForm.value);
     this.devSrv.updateDevice(this.devId, this.deviceForm.value).subscribe(
-      (res) => {
+      (res:any) => {
         this.router.navigate([
           { outlets: { primary: "devices", menu: "devices" } },
         ]);
       },
-      (error) => {
+      (error:any) => {
         this.toastr.warning(
           "Error",
           error.message +

@@ -1,33 +1,37 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
-import { Employee } from "src/app/interfaces/employee.interface";
-import { Type } from "src/app/interfaces/type.";
-import { DevicesSrvService } from "src/app/services/devices-srv.service";
-import { EmployeesSrvService } from "src/app/services/employees-srv.service";
+
+import { MyType } from "../../../interfaces/type.";
+import { EmployeesSrvService } from "../../../services/employees-srv.service";
+import { DevicesSrvService } from "../../../services/devices-srv.service";
+import { Employee } from "../../../interfaces/employee.interface";
 
 @Component({
   selector: "app-create-device",
   templateUrl: "./create-device.component.html",
-  styleUrls: ["./create-device.component.scss"],
+  styleUrls: ["./create-device.component.css"],
 })
 export class CreateDeviceComponent implements OnInit {
   deviceForm: any;
-  typeData: Type[] = [
-    new Type(1, "../../assets/phone.png"),
-    new Type(2, "../../assets/laptop.png"),
-    new Type(3, "../../assets/tablet.png"),
+  typeData: MyType[] = [
+    {id:1, image:"../../assets/phone.png"},
+    {id:2, image:"../../assets/laptop.png"},
+    {id:3, image:"../../assets/tablet.png"}
   ];
 
   employees!: any;
 
+  private empSrv : EmployeesSrvService = inject(EmployeesSrvService);
+  private devSrv : DevicesSrvService = inject(DevicesSrvService);
+
   constructor(
     private formBuilder: FormBuilder,
-    private devSrv: DevicesSrvService,
+   // private devSrv: DevicesSrvService,
     private toastr: ToastrService,
     private router: Router,
-    private empSrv: EmployeesSrvService
+   // private empSrv: EmployeesSrvService
   ) {
     this.deviceForm = this.formBuilder.group({
       serial_number: ["", [Validators.required]],
@@ -42,7 +46,7 @@ export class CreateDeviceComponent implements OnInit {
       (res: Employee) => {
         this.employees = res;
       },
-      (error) => {
+      (error:any) => {
         this.toastr.warning(
           "Error",
           error.message + " " + error.error.email + " " + error.error.name,
@@ -76,7 +80,7 @@ export class CreateDeviceComponent implements OnInit {
           { outlets: { primary: "devices", menu: "devices" } },
         ]);
       },
-      (error) => {
+      (error:any) => {
         this.toastr.warning(
           "Error",
           error.message +

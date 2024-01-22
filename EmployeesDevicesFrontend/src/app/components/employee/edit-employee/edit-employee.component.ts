@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Device } from 'src/app/interfaces/device';
-import { Employee } from 'src/app/interfaces/employee.interface';
-import { DevicesSrvService } from 'src/app/services/devices-srv.service';
-import { EmployeesSrvService } from 'src/app/services/employees-srv.service';
-import { UploadService } from 'src/app/services/upload.service';
+import { Employee } from '../../../interfaces/employee.interface';
+import { Device } from '../../../interfaces/device';
+import { EmployeesSrvService } from '../../../services/employees-srv.service';
+import { DevicesSrvService } from '../../../services/devices-srv.service';
+import { UploadService } from '../../../services/upload.service';
 
 @Component({
   selector: 'app-edit-employee',
   templateUrl: './edit-employee.component.html',
-  styleUrls: ['./edit-employee.component.scss'],
+  styleUrls: ['./edit-employee.component.css'],
 })
 export class EditEmployeeComponent implements OnInit {
   employeeForm: any;
@@ -26,14 +26,18 @@ export class EditEmployeeComponent implements OnInit {
   bucket:string = 'https://django-angular-employee-paraskevas.s3.eu-central-1.amazonaws.com/media/';
   finalUrl!:string;
 
+  private empSrv : EmployeesSrvService = inject(EmployeesSrvService);
+  private devSrv : DevicesSrvService = inject(DevicesSrvService);
+  private uploadSrv : UploadService = inject(UploadService);
+
   constructor(
     private formBuilder: FormBuilder,
-    private empSrv: EmployeesSrvService,
+  //  private empSrv: EmployeesSrvService,
     private toastr: ToastrService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private devSrv: DevicesSrvService,
-    private uploadSrv:UploadService
+  //  private devSrv: DevicesSrvService,
+  //  private uploadSrv:UploadService
   ) {
     this.employeeForm = this.formBuilder.group({
       // id:['',Validators.required],
@@ -46,13 +50,13 @@ export class EditEmployeeComponent implements OnInit {
   ngOnInit(): void {
     this.empId = this.activatedRoute.snapshot.params['id'];
     this.empSrv.getOneEmployee(this.empId).subscribe(
-      (res) => {
+      (res:any) => {
         this.employeeData = res;
         //this.employeeForm.controls.id.patchValue(this.employeeData.id);
         this.employeeForm.controls.name.patchValue(this.employeeData.name);
         this.employeeForm.controls.email.patchValue(this.employeeData.email);
       },
-      (error) => {
+      (error:any) => {
         this.toastr.warning(
           'Error',
           error.message + ' ' + error.error.email + ' ' + error.error.name,
@@ -74,7 +78,7 @@ export class EditEmployeeComponent implements OnInit {
         console.log('holder of devices  ' + this.deviceCurrentEmp);
         this.employeeForm.controls.ownedDev.setValue(this.deviceCurrentEmp);
       },
-      (error) => {
+      (error:any) => {
         this.toastr.warning(
           'Error',
           error.message + ' ' + error.error.email + ' ' + error.error.name,
@@ -110,7 +114,7 @@ export class EditEmployeeComponent implements OnInit {
     console.log('missing ');
     console.log(missing);
     this.empSrv.updateEmployee(this.empId, this.employeeForm.value).subscribe(
-      (res) => {
+      (res:any) => {
         console.log(
           'selected devices  ' + this.employeeForm.controls.ownedDev.value
         );
@@ -158,7 +162,7 @@ export class EditEmployeeComponent implements OnInit {
           { outlets: { primary: 'employees', menu: 'employees' } },
         ]);
       },
-      (error) => {
+      (error:any) => {
         this.toastr.warning(
           'Error',
           error.message + ' ' + error.error.email + ' ' + error.error.name,
@@ -196,7 +200,7 @@ onUpload() {
           this.finalUrl = this.imageData;
           this.loading = false; // Flag variable
         }
-      }, (error) => {
+      }, (error:any) => {
         this.toastr.warning(
           'Error',
           error.message,

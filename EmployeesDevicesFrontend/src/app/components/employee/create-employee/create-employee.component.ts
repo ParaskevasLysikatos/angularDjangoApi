@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
@@ -7,16 +7,16 @@ import {
 } from "@angular/forms";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
-import { Device } from "src/app/interfaces/device";
-import { Employee } from "src/app/interfaces/employee.interface";
-import { DevicesSrvService } from "src/app/services/devices-srv.service";
-import { EmployeesSrvService } from "src/app/services/employees-srv.service";
-import { UploadService } from "src/app/services/upload.service";
+import { EmployeesSrvService } from "../../../services/employees-srv.service";
+import { DevicesSrvService } from "../../../services/devices-srv.service";
+import { UploadService } from "../../../services/upload.service";
+import { Device } from "../../../interfaces/device";
+
 
 @Component({
   selector: "app-create-employee",
   templateUrl: "./create-employee.component.html",
-  styleUrls: ["./create-employee.component.scss"],
+  styleUrls: ["./create-employee.component.css"],
 })
 export class CreateEmployeeComponent implements OnInit {
   employeeForm: any;
@@ -24,13 +24,17 @@ export class CreateEmployeeComponent implements OnInit {
   //upload
   loading: boolean = false; // Flag variable
   image!: File; // Variable to store file
+
+  private empSrv : EmployeesSrvService = inject(EmployeesSrvService);
+  private devSrv : DevicesSrvService = inject(DevicesSrvService);
+  private uploadSrv : UploadService = inject(UploadService);
   constructor(
     private formBuilder: FormBuilder,
-    private empSrv: EmployeesSrvService,
+   // private empSrv: EmployeesSrvService,
     private toastr: ToastrService,
     private router: Router,
-    private devSrv: DevicesSrvService,
-     private uploadSrv:UploadService
+   // private devSrv: DevicesSrvService,
+    // private uploadSrv:UploadService
   ) {
     this.employeeForm = this.formBuilder.group({
       name: ["", [Validators.required, Validators.minLength(3)]],
@@ -96,7 +100,7 @@ export class CreateEmployeeComponent implements OnInit {
           { outlets: { primary: "employees", menu: "employees" } },
         ]);
       },
-      (error) => {
+      (error:any) => {
         this.toastr.warning(
           "Error",
           error.message + " " + error.error.email + " " + error.error.name,
@@ -131,7 +135,7 @@ export class CreateEmployeeComponent implements OnInit {
 
           this.loading = false; // Flag variable
         }
-      }, (error) => {
+      }, (error:any) => {
         this.toastr.warning(
           'Error',
           error.message,

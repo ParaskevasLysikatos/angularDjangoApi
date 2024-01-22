@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -19,7 +18,6 @@ import {MatInputModule} from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
 
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ToastrModule } from 'ngx-toastr';
 import { NgHttpLoaderModule } from 'ng-http-loader';
 
@@ -34,10 +32,6 @@ import { CreateDeviceComponent } from './components/device/create-device/create-
 
 
 
-
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,15 +42,13 @@ import { CreateDeviceComponent } from './components/device/create-device/create-
     CreateEmployeeComponent,
     EditEmployeeComponent,
     EditDeviceComponent,
-    CreateDeviceComponent,
+    CreateDeviceComponent
 
   ],
   imports: [
-    MDBBootstrapModule.forRoot(),
     ToastrModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
-    NgbModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,

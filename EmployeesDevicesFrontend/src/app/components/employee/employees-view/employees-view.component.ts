@@ -1,10 +1,11 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
-import { Employee } from "src/app/interfaces/employee.interface";
-import { DevicesSrvService } from "src/app/services/devices-srv.service";
-import { EmployeesSrvService } from "src/app/services/employees-srv.service";
-import { UploadService } from "src/app/services/upload.service";
+
+import { EmployeesSrvService } from "../../../services/employees-srv.service";
+import { DevicesSrvService } from "../../../services/devices-srv.service";
+import { UploadService } from "../../../services/upload.service";
+
 
 export class OwnerManager {
   empId: number;
@@ -18,7 +19,7 @@ export class OwnerManager {
 @Component({
   selector: "app-employees-view",
   templateUrl: "./employees-view.component.html",
-  styleUrls: ["./employees-view.component.scss"],
+  styleUrl: "./employees-view.component.css",
 })
 export class EmployeesViewComponent implements OnInit {
   displayedColumns1: string[] = [
@@ -40,19 +41,22 @@ export class EmployeesViewComponent implements OnInit {
   bucket:string = 'https://django-angular-employee-paraskevas.s3.eu-central-1.amazonaws.com/media/';
 
   constructor(
-    private empSrv: EmployeesSrvService,
+  //  private empSrv: EmployeesSrvService,
     private toastr: ToastrService,
     private router: Router,
-    private devSrv: DevicesSrvService,
-    private uploadSrv:UploadService
+  //  private devSrv: DevicesSrvService,
+   // private uploadSrv:UploadService
   ) {}
+  private empSrv : EmployeesSrvService = inject(EmployeesSrvService);
+  private devSrv : DevicesSrvService = inject(DevicesSrvService);
+  private uploadSrv : UploadService = inject(UploadService);
 
   ngOnInit(): void {
     this.empSrv.getEmployees().subscribe(
       (res: any) => {
         this.dataSource1 = res;
       },
-      (error) => {
+      (error:any) => {
         this.toastr.warning(
           "Error",
           error.message + " " + error.error.email + " " + error.error.name,
@@ -65,7 +69,7 @@ export class EmployeesViewComponent implements OnInit {
         this.devicesData = result;
         this.CalcEmployeeDevices();
       },
-      (error) => {
+      (error:any) => {
         this.toastr.warning(
           "Error",
           error.message +
@@ -84,12 +88,12 @@ export class EmployeesViewComponent implements OnInit {
   }
 
   DeleteEmp(id: number) {
-    this.empSrv.deleteEmployee(id).subscribe((res) => {
+    this.empSrv.deleteEmployee(id).subscribe((res:any) => {
       this.empSrv.getEmployees().subscribe(
         (res: any) => {
           this.dataSource1 = res;
         },
-        (error) => {
+        (error:any) => {
           this.toastr.warning(
             "Error",
             error.message + " " + error.error.email + " " + error.error.name,

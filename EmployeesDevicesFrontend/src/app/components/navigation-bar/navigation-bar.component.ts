@@ -1,15 +1,17 @@
-import { Component, OnInit, SimpleChanges, ViewChild } from "@angular/core";
+import { Component, OnInit, SimpleChanges, ViewChild, inject } from "@angular/core";
 import { MatSidenav } from "@angular/material/sidenav";
 
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
-import { DevicesSrvService } from "src/app/services/devices-srv.service";
-import { EmployeesSrvService } from "src/app/services/employees-srv.service";
+
+import { EmployeesSrvService } from "../../services/employees-srv.service";
+import { DevicesSrvService } from "../../services/devices-srv.service";
+
 
 @Component({
-  selector: "app-navigation-bar",
-  templateUrl: "./navigation-bar.component.html",
-  styleUrls: ["./navigation-bar.component.scss"],
+  selector: 'app-navigation-bar',
+  templateUrl: './navigation-bar.component.html',
+  styleUrl: './navigation-bar.component.css'
 })
 export class NavigationBarComponent implements OnInit {
   @ViewChild("sidenav") sidenav!: MatSidenav;
@@ -28,10 +30,12 @@ export class NavigationBarComponent implements OnInit {
   devWithEmp!: number;
   constructor(
     protected route: Router,
-    private empSrv: EmployeesSrvService,
-    private devSrv: DevicesSrvService,
+   // private empSrv: EmployeesSrvService,
+  //  private devSrv: DevicesSrvService,
     private toastr: ToastrService
   ) {}
+  private empSrv : EmployeesSrvService = inject(EmployeesSrvService);
+  private devSrv : DevicesSrvService = inject(DevicesSrvService);
 
   ngOnInit(): void {
     //at the beginning calculate my database emp-dev
@@ -43,7 +47,7 @@ export class NavigationBarComponent implements OnInit {
       (result: any) => {
         result.forEach((item: any) => this.allEmpCounter++);
       },
-      (error) => {
+      (error:any) => {
         this.toastr.warning(
           "Error",
           error.message + " " + error.error.email + " " + error.error.name,
@@ -58,7 +62,7 @@ export class NavigationBarComponent implements OnInit {
           item.owner == null ? this.devWithout++ : this.devWithEmp++
         );
       },
-      (error) => {
+      (error:any) => {
         this.toastr.warning(
           "Error",
           error.message +
@@ -88,7 +92,7 @@ export class NavigationBarComponent implements OnInit {
       (result: any) => {
         result.forEach((item: any) => this.allEmpCounter++);
       },
-      (error) => {
+      (error:any) => {
         this.toastr.warning(
           "Error",
           error.message + " " + error.error.email + " " + error.error.name,
@@ -103,7 +107,7 @@ export class NavigationBarComponent implements OnInit {
           item.owner == null ? this.devWithout++ : this.devWithEmp++
         );
       },
-      (error) => {
+      (error:any) => {
         this.toastr.warning(
           "Error",
           error.message +
